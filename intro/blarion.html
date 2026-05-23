@@ -9,10 +9,10 @@
 
     <meta property="og:title" content="Blarion AntiCheat 介绍">
     <meta property="og:description" content="StarBloom(星绽) BlarionAntiCheat 反作弊系统介绍">
-    <meta property="og:image" content="./icon.png">
+    <meta property="og:image" content="./blarion.png">
 
     <title>Blarion AntiCheat 介绍</title>
-    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="icon" type="image/png" href="./blarion.png">
     <meta name="theme-color" content="#0a0a0a">
 
     <style>
@@ -177,6 +177,14 @@
             line-height: 1.5;
         }
 
+        .compatibility-info {
+            background: rgba(255,255, 100, 0.08);
+            border: 1px solid rgba(255,255, 100, 0.25);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-top: 10px;
+        }
+
         .cmd-list {
             display: flex;
             flex-direction: column;
@@ -307,14 +315,19 @@
     <div class="stars" id="stars"></div>
 
     <div class="container">
+
         <h1>✦ Blarion AntiCheat ✦</h1>
-        <div class="subtitle">Minecraft 基岩版行为包反作弊系统</div>
+        <div class="subtitle">一款通用的 Minecraft 基岩版行为包反作弊系统</div>
 
         <div class="section">
             <h2>关于 Blarion</h2>
-            <p>Blarion AntiCheat 是一个基于 Scythe 反作弊开发的通用 Minecraft 基岩版行为包反作弊，但现已几乎抛弃了 Scythe 的检测代码，由 <strong>NyaCrasin、NexShell、NotWater_135</strong> 共同参与开发。</p>
+            <p>Blarion AntiCheat 是一个基于 MrDiamond64 的 Scythe 反作弊开发的通用 Minecraft 基岩版行为包反作弊，但现已几乎抛弃了 Scythe 的检测代码，由 <strong>NyaCrasin、NexShell、NotWater_135</strong> 共同参与开发。</p>
             <p>演示视频：<a href="https://www.bilibili.com/video/BV1Pt421j7tQ" style="color:#aabbff;" target="_blank">Bilibili BV1Pt421j7tQ</a></p>
-            <p>外链下载：<a href="https://github.com/StarBloomMinecraft/BlarionAntiCheat/releases" style="color:#aabbff;" target="_blank">Github</a></p>
+            <p><strong>外链下载：</strong></p>
+            <p><a href="https://github.com/StarBloomMinecraft/BlarionAntiCheat/releases" style="color:#aabbff;" target="_blank">✦ Github ✦</a></p>
+            <p>  -- 最新版会第一时间发布到这里，包含完整版本库，但不稳定 </p>
+            <p><a href="https://pan.quark.com" style="color:#aabbff;" target="_blank">✦ 夸克网盘 ✦</a></p>
+            <p>  -- 如果进不去github可以考虑使用，但版本稍滞后，且仅有稳定版 </p>
         </div>
 
         <div class="section">
@@ -346,8 +359,8 @@
                     <div class="cmd-desc">Blarion 反作弊主命令。可查看帮助、版本信息或制作人员列表。</div>
                 </div>
                 <div class="cmd-item">
-                    <div class="cmd-name">/flag &lt;玩家&gt; &lt;[模块名]&gt; [类型] [调试数据] [是否TP] [是否计VL] [显示类型]</div>
-                    <div class="cmd-desc">这是一个面向开发者的命令，通过外部扩展反作弊程序(如Websocket，MineProxy)手动触发一次作弊标记（需要GameDirector权限）。</div>
+                    <div class="cmd-name">/flag &lt;玩家&gt; &lt;模块名&gt; [检测类型] [调试数据] [是否拉回] [是否记录违规] [显示类型]</div>
+                    <div class="cmd-desc">这是一个面向开发者的命令，通过外部扩展反作弊程序(如Websocket，MineProxy等)手动触发一次作弊标记（需要GameDirector权限）。</div>
                 </div>
             </div>
 
@@ -356,19 +369,27 @@
                 <div> 在游戏内使用 <code>/tag 玩家 add bypass_anticheat</code> 可跳过对该玩家的检查；</div>
                 <div> 使用 <code>/tag 玩家 remove bypass_anticheat</code> 可恢复检查。</div>
                 <div> 或者是在config.js内的whitelist列表填上目标玩家的名字 </div>
-        </div>
-
-        <div class="section">
-            <h2>检测模块列表</h2>
-            <div class="check-grid" id="checkGrid">
-                <!-- 由 JS 生成 -->
             </div>
-        </div>
 
-        <div class="section">
-            <h2>讨论 & 反馈</h2>
-            <p>暂无 Discord 讨论群。</p>
-            <p>对于中国大陆 / 香港 / 澳门 / 台湾地区，可加入 QQ 群 <strong>568240555</strong> 反馈问题。</p>
+            <div class="compatibility-info">
+                <div> <strong>兼容性问题：</strong> </div>
+                <div> ✔ 在几乎所有保留Minecraft原生插件的环境可用(如客户端，BDS，LiteLoader等) </div>
+                <div> ✖ Realms环境不支持BetaAPI，不可用，可以考虑使用Scythe作为阉割替代版 </div>
+                <div> ⚠ 在部分第三方服务器核心可能不可用(如PocketMine、PowerNukkit等java核心服务器不可用) </div>
+            </div>
+
+            <div class="section">
+                <h2>检测模块列表</h2>
+                <div class="check-grid" id="checkGrid">
+                    <!-- 由 JS 生成 -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>讨论 & 反馈</h2>
+                <p>暂无 Discord 讨论群，后期会考虑。</p>
+                <p>对于中国大陆 / 香港 / 澳门 / 台湾地区，可加入 QQ 群 <strong>568240555</strong> 反馈问题。</p>
+            </div>
         </div>
     </div>
 
@@ -455,9 +476,9 @@
                     ? '<span class="status-badge status-enabled">默认启用</span>'
                     : '<span class="status-badge status-disabled">默认禁用</span>';
                 card.innerHTML = `
-                    <div class="check-name">${formatModuleName(mod.name)} 检查: ${badge}</div>
-                    <div class="check-desc">· ${mod.desc.replace(/\n/g, '<br>· ')}</div>
-                `;
+                        <div class="check-name">${formatModuleName(mod.name)} 检查: ${badge}</div>
+                        <div class="check-desc">· ${mod.desc.replace(/\n/g, '<br>· ')}</div>
+                    `;
                 grid.appendChild(card);
             });
         }
