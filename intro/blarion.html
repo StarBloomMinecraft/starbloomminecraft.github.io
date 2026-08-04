@@ -354,6 +354,7 @@
                 <div class="cmd-item">
                     <div class="cmd-name">/scan [玩家]</div>
                     <div class="cmd-desc">扫描玩家，寻找NBT修改器的痕迹。如果不指定玩家，则扫描所有在线玩家。</div>
+                    <div class="cmd-params">⚠ 注意：该命令可能很快就会被移除</div>
                 </div>
                 <div class="cmd-item">
                     <div class="cmd-name">/blac &lt;help|version|credits&gt;</div>
@@ -362,6 +363,22 @@
                 <div class="cmd-item">
                     <div class="cmd-name">/flag &lt;玩家&gt; &lt;模块名&gt; [检测类型] [调试数据] [是否拉回] [是否记录违规] [显示类型]</div>
                     <div class="cmd-desc">这是一个面向开发者的命令，通过外部扩展反作弊程序(如Websocket，MineProxy等)手动触发一次作弊标记（需要GameDirector权限）。</div>
+                </div>
+                <div class="cmd-item">
+                    <div class="cmd-name">/raisecheck &lt;玩家&gt; &lt;模块名&gt; [JSON数据]</div>
+                    <div class="cmd-desc">内部API命令</div>
+                </div>
+                <div class="cmd-item">
+                    <div class="cmd-name">/antigm &lt;游戏模式&gt; &lt;是否启用&gt;</div>
+                    <div class="cmd-desc">用于设置某游戏模式是否为非管理玩家可用。</div>
+                </div>
+                <div class="cmd-item">
+                    <div class="cmd-name">/clientinfo &lt;玩家&gt; &lt;显示方式&gt; </div>
+                    <div class="cmd-desc">用于查看玩家客户端的部分信息。</div>
+                </div>
+                <div class="cmd-item">
+                    <div class="cmd-name">/blaclang &lt;语言码&gt; </div>
+                    <div class="cmd-desc">用于设置语言。</div>
                 </div>
             </div>
 
@@ -400,6 +417,7 @@
         const modules = [
             { name: "* ForceOPA", desc: "[ForceOPBlocker-1]\n玩家连接检查，用于阻挡越级黑入", enabled: true },
             { name: "* ForceOPB", desc: "[ForceOPBlocker-2]\n玩家连接检查，用于阻挡自动机器人刷屏", enabled: true },
+            { name: "anoncommandA", desc: "(仅服务器可用，需要server-net模块) Websocket 命令请求检查", enabled: true },
             { name: "autoclickerA", desc: "检测过高的 CPS（每秒点击次数）", enabled: true },
             { name: "autoclickerB", desc: "(等待修复) 检测稳定的，不可能由人为操作实现的 CPS 情况", enabled: false },
             { name: "autoequipA", desc: "检测极高速切换装备", enabled: true },
@@ -419,7 +437,6 @@
             { name: "commandblockexploitF", desc: "阻止放置蜂巢、蜂箱和移动方块", enabled: true },
             { name: "commandblockexploitG", desc: "额外击杀检查（命令方块矿车等实体）", enabled: true },
             { name: "commandblockexploitH", desc: "额外物品清除检查", enabled: false },
-            { name: "commandblockexploitW", desc: "(API) Websocket 命令请求检查", enabled: true },
             { name: "crasherA", desc: "检测传送出世界边界", enabled: true },
             { name: "crasherB", desc: "检测过大的渲染距离", enabled: true },
             { name: "crasherC", desc: "(需要StarBloomAPI) 检测无效字符导致的崩溃", enabled: true },
@@ -452,12 +469,16 @@
             { name: "scaffoldC", desc: "检测玩家向上看时在脚下放置方块", enabled: true },
             { name: "scaffoldD", desc: "检测向下搭路", enabled: false },
             { name: "scaffoldE", desc: "检测在液体或空气中放置方块", enabled: true },
+            { name: "spammerA", desc: "检查玩家在移动时发消息", enabled: true },
+            { name: "spammerB", desc: "检查玩家消息是否含有违法字符(例如换行符)", enabled: true },
+            { name: "spammerC", desc: "检查玩家是否频繁发消息", enabled: true },
+            { name: "spammerD", desc: "检查玩家是否在与其他UI交互时发消息", enabled: true },
             { name: "xrayA", desc: "矿物透视辅助检查，在玩家频繁挖取稀有矿时提醒管理员 (不是真的能检查矿透!)", enabled: false },
             { name: "speedA", desc: "检测玩家陆地移动速度超过原版", enabled: false },
             { name: "speedB", desc: "检测玩家使用兔子跳/虚空跳/长跳/速度飞行", enabled: false },
             { name: "speedC", desc: "检测其他类速度移动，如伪传送等", enabled: true },
             { name: "timerA", desc: "(已过时) 检测玩家客户端游戏刻异常（Timer）", enabled: false },
-            { name: "timerB", desc: "检测玩家发包速率异常\n[仅服务器，需要BlarionNetWork扩展包]", enabled: true }
+            { name: "timerB", desc: "(仅服务器可用，需要server-net模块)检测玩家发包速率异常", enabled: true }
         ];
 
         function formatModuleName(name) {
